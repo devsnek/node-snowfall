@@ -34,12 +34,12 @@ class Snowfall {
   * Generate a Snowflake
   * @returns {Snowflake} The generated Snowflake
   */
-  next() {
+  next({ date, sequence } = {}) {
     if (this.sequence >= 4096) this.sequence = 0;
-    const TIMESTAMP = pad((Date.now() - this.epoch).toString(2), 42);
+    const TIMESTAMP = pad(((date || Date.now()) - this.epoch).toString(2), 42);
     const WORKER = pad(this.workerID.toString(2), 5);
     const PROCESS = pad(this.processID.toString(2), 5);
-    const SEQUENCE = pad((this.sequence++).toString(2), 12);
+    const SEQUENCE = pad((sequence || this.sequence++).toString(2), 12);
     const BINARY = `${TIMESTAMP}${PROCESS}${WORKER}${SEQUENCE}`;
     return Long.fromString(BINARY, 2).toString();
   }
