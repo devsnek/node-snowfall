@@ -11,12 +11,16 @@ A Snowflake generator and deconstructor.
 const Snowfall = require('snowfall');
 
 const flurry = new Snowfall({
-  epoch: Snowfall.EPOCHS.Discord,
+  epoch: Snowfall.EPOCHS.DISCORD,
   workerID: 7,
   processID: 21,
 });
 
-const flake = flurry.next(); // get the latest snowflake
+// generate a new snowflake
+let flake = flurry.next();
+
+// generate a snowflake with a custom date and sequence
+flake = flurry.next({ date: new Date('2015-01-01'), sequence: 0 });
 
 console.log(flurry.deconstruct(flake));
 ```
