@@ -1,0 +1,16 @@
+{
+  "name": "snowfall",
+  "version": "1.0.0",
+  "description": "A Snowflake generator and deconstructor.",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GusCaplan/node-snowfall.git"
+  },
+  "author": "Gus Caplan <me@gus.host>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GusCaplan/node-snowfall/issues"
+  },
+  "homepage": "https://github.com/GusCaplan/node-snowfall#readme"
+}
