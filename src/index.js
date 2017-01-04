@@ -25,7 +25,7 @@ const COMMON_EPOCHS = {
 class Snowfall {
   constructor({ workerID, processID, sequence, epoch } = {}) {
     this.workerID = workerID || 1;
-    this.datacenterID = processID || 1;
+    this.processID = processID || 1;
     this.sequence = sequence || 0;
     this.epoch = epoch || COMMON_EPOCHS.UNIX;
   }
