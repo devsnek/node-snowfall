@@ -40,7 +40,7 @@ class Snowfall {
     const WORKER = pad(this.workerID.toString(2), 5);
     const PROCESS = pad(this.processID.toString(2), 5);
     const SEQUENCE = pad((sequence || this.sequence++).toString(2), 12);
-    const BINARY = `${TIMESTAMP}${PROCESS}${WORKER}${SEQUENCE}`;
+    const BINARY = `${TIMESTAMP}${WORKER}${PROCESS}${SEQUENCE}`;
     return Long.fromString(BINARY, 2).toString();
   }
 
