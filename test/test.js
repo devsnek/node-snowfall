@@ -4,7 +4,7 @@ const flurry = new Snowfall({ epoch: Snowfall.EPOCHS.DISCORD });
 
 function assert(a, b) {
   if (a !== b) throw new Error(`${a} does not equal ${b}!`);
-  console.log(`${a} is equal to ${b}!`);
+  console.log(`${a} is equal to ${b}!`); // eslint-disable-line no-console
 }
 
 let flake = flurry.next();
