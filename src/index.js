@@ -17,7 +17,7 @@ const COMMON_EPOCHS = {
   *
   * 64                                          22     17     12          0
   *  000000111011000111100001101001000101000000  00001  00000  000000000000
-  *   ms since epoch (discord in this example)   worker  pid    increment
+  *   ms since epoch (discord in this example)   worker  pid     interval
   * ```
   * Note: this generator hardcodes the worker id as 1 and the process id as 0
   * @typedef {string} Snowflake
@@ -39,7 +39,7 @@ class Snowfall {
     const TIMESTAMP = pad(((date || Date.now()) - this.epoch).toString(2), 42);
     const WORKER = pad(this.workerID.toString(2), 5);
     const PROCESS = pad(this.processID.toString(2), 5);
-    const INTERVAL = pad((interval || this.interval++).toString(2), 12);
+    const INTERVAL = pad((typeof interval === 'number' ? interval : this.interval).toString(2), 12);
     const BINARY = `${TIMESTAMP}${WORKER}${PROCESS}${INTERVAL}`;
     return Long.fromString(BINARY, 2).toString();
   }
