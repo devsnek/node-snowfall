@@ -39,7 +39,7 @@ class Snowfall {
     const TIMESTAMP = pad(((date || Date.now()) - this.epoch).toString(2), 42);
     const WORKER = pad(this.workerID.toString(2), 5);
     const PROCESS = pad(this.processID.toString(2), 5);
-    const INTERVAL = pad((typeof interval === 'number' ? interval : this.interval).toString(2), 12);
+    const INTERVAL = pad((typeof interval === 'number' ? interval : this.interval++).toString(2), 12);
     const BINARY = `${TIMESTAMP}${WORKER}${PROCESS}${INTERVAL}`;
     return Long.fromString(BINARY, 2).toString();
   }
