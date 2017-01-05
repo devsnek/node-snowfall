@@ -24,8 +24,8 @@ const COMMON_EPOCHS = {
   */
 class Snowfall {
   constructor({ workerID, processID, interval, epoch } = {}) {
-    this.workerID = workerID || 1;
-    this.processID = processID || 1;
+    this.workerID = workerID || 0;
+    this.processID = processID || 0;
     this.interval = interval || 0;
     this.epoch = epoch || COMMON_EPOCHS.UNIX;
   }
@@ -47,17 +47,30 @@ class Snowfall {
   /**
    * Deconstruct a Snowflake
    * @param {Snowflake} snowflake Snowflake to deconstruct
+   * @param {number} [epoch=this.epoch] Epoch used to calculate the date
    * @returns {DeconstructedSnowflake} Deconstructed snowflake
    */
-  deconstruct(snowflake) {
+  deconstruct(snowflake, epoch) {
+    epoch = typeof epoch === 'number' ? epoch : this.epoch;
+    if (!epoch) epoch = 0;
     const BINARY = pad(Long.fromString(snowflake).toString(2), 64);
     return {
-      date: new Date(parseInt(BINARY.substring(0, 42), 2) + this.epoch),
+      date: new Date(parseInt(BINARY.substring(0, 42), 2) + epoch),
       workerID: parseInt(BINARY.substring(42, 47), 2),
       processID: parseInt(BINARY.substring(47, 52), 2),
       interval: parseInt(BINARY.substring(52, 64), 2),
       binary: BINARY,
     };
+  }
+
+  /**
+   * Deconstruct a Snowflake
+   * @param {Snowflake} snowflake Snowflake to deconstruct
+   * @param {number} [epoch=0] Epoch used to calculate the date
+   * @returns {DeconstructedSnowflake} Deconstructed snowflake
+   */
+  static deconstruct(snowflake, epoch) {
+    return this.prototype.deconstruct(snowflake, epoch);
   }
 }
 
