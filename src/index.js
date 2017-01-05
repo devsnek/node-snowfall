@@ -23,10 +23,10 @@ const COMMON_EPOCHS = {
   * @typedef {string} Snowflake
   */
 class Snowfall {
-  constructor({ workerID, processID, sequence, epoch } = {}) {
+  constructor({ workerID, processID, interval, epoch } = {}) {
     this.workerID = workerID || 1;
     this.processID = processID || 1;
-    this.sequence = sequence || 0;
+    this.interval = interval || 0;
     this.epoch = epoch || COMMON_EPOCHS.UNIX;
   }
 
@@ -34,13 +34,13 @@ class Snowfall {
   * Generate a Snowflake
   * @returns {Snowflake} The generated Snowflake
   */
-  next({ date, sequence } = {}) {
-    if (this.sequence >= 4096) this.sequence = 0;
+  next({ date, interval } = {}) {
+    if (this.interval >= 4096) this.interval = 0;
     const TIMESTAMP = pad(((date || Date.now()) - this.epoch).toString(2), 42);
     const WORKER = pad(this.workerID.toString(2), 5);
     const PROCESS = pad(this.processID.toString(2), 5);
-    const SEQUENCE = pad((sequence || this.sequence++).toString(2), 12);
-    const BINARY = `${TIMESTAMP}${WORKER}${PROCESS}${SEQUENCE}`;
+    const INTERVAL = pad((interval || this.interval++).toString(2), 12);
+    const BINARY = `${TIMESTAMP}${WORKER}${PROCESS}${INTERVAL}`;
     return Long.fromString(BINARY, 2).toString();
   }
 
@@ -55,7 +55,7 @@ class Snowfall {
       date: new Date(parseInt(BINARY.substring(0, 42), 2) + this.epoch),
       workerID: parseInt(BINARY.substring(42, 47), 2),
       processID: parseInt(BINARY.substring(47, 52), 2),
-      sequqnce: parseInt(BINARY.substring(52, 64), 2),
+      interval: parseInt(BINARY.substring(52, 64), 2),
       binary: BINARY,
     };
   }
