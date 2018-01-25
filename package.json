@@ -1,16 +1,17 @@
 {
   "name": "snowfall",
-  "version": "2.0.0",
-  "description": "A Snowflake generator and deconstructor.",
+  "version": "2.1.0",
+  "description": "A BigInt twitter snowflake generator and deconstructor.",
   "main": "src/index.js",
+  "keywords": ["bigint", "64bit", "snowflake", "twitter"],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GusCaplan/node-snowfall.git"
+    "url": "git+https://github.com/devsnek/node-snowfall.git"
   },
-  "author": "Gus Caplan <me@gus.host>",
+  "author": "snek <me@gus.host>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GusCaplan/node-snowfall/issues"
+    "url": "https://github.com/devsnek/node-snowfall/issues"
   },
-  "homepage": "https://github.com/GusCaplan/node-snowfall#readme"
+  "homepage": "https://github.com/devsnek/node-snowfall#readme"
 }
