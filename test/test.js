@@ -5,18 +5,20 @@ const flurry = new Snowfall({ epoch: Snowfall.EPOCHS.DISCORD });
 
 let flake = flurry.next();
 
-flake = flurry.next({
-  date: new Date('2015-01-01'),
-});
-assert.strictEqual(flake, '1');
+const T = BigInt(new Date('2015-01-01').getTime());
 
 flake = flurry.next({
-  date: new Date('2015-01-01'),
+  timestamp: T,
 });
-assert.strictEqual(flake, '2');
+assert.strictEqual(flake, 1n);
 
 flake = flurry.next({
-  date: new Date('2015-01-01'),
-  interval: 0,
+  timestamp: T,
 });
-assert.strictEqual(flake, '0');
+assert.strictEqual(flake, 2n);
+
+flake = flurry.next({
+  timestamp: T,
+  interval: 0n,
+});
+assert.strictEqual(flake, 0n);
